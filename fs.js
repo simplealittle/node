@@ -1,6 +1,6 @@
 var fs=require("fs");
 
-console.log("start")
+console.log("start");
 //fs.readFile("./static/json/test.txt",function(err,data){
 //	if(err){
 //		console.log(err);
