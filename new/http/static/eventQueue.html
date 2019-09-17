@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+ <button class="btn1">Button</button>
+ <button class="btn2">Button</button>
+ <script>
+var btn1 = document.querySelector('.btn1');
+var btn2 = document.querySelector('.btn2');
+btn1.addEventListener('click', function () {
+  Promise.resolve().then(function() {
+    console.log('Microtask 1');
+  })
+    console.log('Listener 1');
+});
+btn1.addEventListener('click', function () {
+  Promise.resolve().then(function() {
+    console.log('Microtask 2');
+  })
+  console.log('Listener 2');
+});
+btn2.addEventListener("click",function(){
+    btn1.click()
+})
+
+ </script>
+</body>
+</html>

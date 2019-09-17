@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Fsm(){
+				this.currentState="default";
+				this.jump=function(newState){
+					
+					var length=this.handers().length;
+					for(let i=0;i<length;i++){
+						if(this.handers()[i].match(this.currentState,newState)){
+							this.handers()[i].hander();
+							this.currentState=newState;
+						}
+					}
+				};
+				this.handers=function(){
+					return [
+					{
+						match:function(oldState,newState){
+							if(oldState=="default"&&newState=="load"){
+								return true
+							}
+							return false;
+						},
+						hander:function(){
+							console.log('default=>load')
+						}
+					},
+					{
+						match:function(oldState,newState){
+							if(oldState=="load"&&newState=="submit"){
+								return true
+							}
+							return false;
+						},
+						hander:function(){
+							console.log('load=>submit')
+						}
+					}
+					]			
+				}
+			}
+		</script>
+	</body>
+</html>

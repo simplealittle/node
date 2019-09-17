@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			span{
+				display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="one" contenteditable="true">今天吃了1顿饭 今天吃了3顿饭</div>
+		<div id="two" contenteditable="true">今天吃了3顿饭   这可怎么办啊 今天吃了3顿饭</div>
+		<button id="ccc">1111</button>
+		<input type="file" name="" id="" value="11" />
+	</body>
+	<script>
+		
+
+			
+		ccc.onclick=function(){
+			var str1=one.innerText;
+			var str2=two.innerText;
+			var bijiao=new Compare(str2)
+			bijiao.all(str1);
+			two.innerHTML=bijiao.str2;
+		}
+			
+		function Compare(str2){
+			
+			this.str2=str2;
+			//a在b中是否存在
+			this.comp=function(a,b){
+				var res=b.match(a)
+				if(res!=null){
+					return res
+				}else{
+					return null;
+				}
+			}
+			
+		
+			//比较后的处理 如果后者存在  返回处理后的后者
+			this.init=function(a,b){
+				var res=this.comp(a,b);
+				if(res){
+					if(res.index==0){
+						//b2是共同体
+						var b2=b.substr(0,a.length);
+						b2="<span style='color:red;'>"+b2+"</span>"
+						if(b.length>a.length){
+							var b3=b.substr(a.length)
+						}
+						b=b2+b3;
+						
+					}else{
+						//共同体前
+						var b1=b.substr(0,res.index);
+						//共同体
+						var b2=b.substr(res.index,a.length);
+						b2="<span style='color:red;'>"+b2+"</span>"
+						if(b.length>res.index+a.length){
+							var b3=b.substr(res.index+a.length);
+							b=b1+b2+b3;
+						}else{
+							b=b1+b2
+						}
+						
+						
+					}
+					return b;
+					
+				}else{
+					return null;
+				}
+				
+			}
+			//如果没有匹配 继续
+			this.F=function(a){
+				//分成2部分
+				
+					var first=a.substr( 0 , Math.ceil(a.length/2) );
+					var two=a.substr( Math.floor(a.length/2),a.length );
+					return [first,two]
+				
+				
+			}
+			this.all=function(a){
+				var res=this.init(a,this.str2);
+				
+				if(res){
+					this.str2=res;
+				
+				}else{
+					//2部分
+					if(a.length>=2){
+						var part=this.F(a);
+						this.all(part[0],this.str2);
+						this.all(part[1],this.str2);
+					}else{
+						return
+					}
+					
+					
+						
+				
+				
+				}
+			}
+		}
+	</script>
+</html>

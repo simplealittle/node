@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			$douCount: 40;
+			$animationTime: 2;
+			$delayTime: 3;
+			
+			@function randomNum($max, $min: 0) {
+			    @return ($min + random($max));
+			}
+			
+			body {
+			    background: #000;
+			    overflow: hidden;
+			}
+			
+			:root {
+			    --fireWidth: 115px;
+			    --fireHeight: 200px;
+			    --dotSize: 24px;
+			    --fireColor: #b5932f;
+			    // --fireColor: #008eff;
+			    // --fireColor: #ff9900;
+			    
+			}
+			
+			.g-container {
+			    position: relative;
+			    width: 384px;
+			    height: 300px;
+			    margin: 0 auto;
+			    background-color: #000;
+			}
+			
+			.g-fire {
+			    position: absolute;
+			    width: 0;
+			    height: 0;
+			    bottom: 100px;
+			    left: 50%;
+			    border-radius: 45%;
+			    box-sizing: border-box;
+			    border: 200px solid #000;
+			    border-bottom: 200px solid transparent;
+			    transform: translate(-50%, 0) scaleX(.4);
+			    background-color: var(--fireColor);
+			    filter: blur(20px) contrast(30);
+			}
+			
+			.g-dot {
+			    position: absolute;
+			    bottom: -210px;
+			    left: 0;
+			    width: var(--dotSize);
+			    height: var(--dotSize);
+			    background: #000;
+			    border-radius: 50%;
+			}
+			
+			@for $i from 1 to $douCount + 1 {
+			    .g-dot:nth-child(#{$i}) {
+			        bottom: -#{randomNum(120, 240)}px;
+			        left: #{randomNum(300, -160)}px;
+			        animation: move #{randomNum($animationTime * 13, 7) / 10}s infinite #{randomNum($delayTime * 20) / 10}s linear;
+			    }
+			}
+			
+			@keyframes move {
+			    100% {
+			        transform: translate3d(0, -350px, 0);
+			    }
+			}
+		</style>
+	</head>
+	<body>
+	</body>
+</html>
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 2em;
+    filter: contrast(20);
+    background-color: black;
+    overflow: hidden;
+}
+
+h1 {
+    font-family: Righteous;
+    color: white;
+    font-size: 4rem;
+    text-transform: uppercase;
+    line-height: 1;
+    animation: letterspacing 5s infinite alternate ease-in-out;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    letter-spacing: -2.2rem;
+}
+
+@keyframes letterspacing {
+    0% {
+        letter-spacing: -2.2rem;
+        filter: blur(.3rem);
+    }
+
+    50% {
+        filter: blur(.5rem);
+    }
+
+    100% {
+        letter-spacing: .5rem;
+        filter: blur(0rem);
+        color: #fff;
+    }
+}

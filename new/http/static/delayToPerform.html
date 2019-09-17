@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+</html>
+<script>
+  	var isOver = false;
+  	//$(".note-previewer")为需要停留的元素
+    $(".note-previewer").on('mouseover', function () {
+        isOver = true;
+        $(".note-previewer").show();//$(this)
+    }).on('mouseout', function () {
+        isOver = false;
+        $(".note-previewer").hide();
+    });
+
+    //划过节点
+    editor.minder.on('shownoterequest', function (e) {
+        setTimeout(function () {
+            preview(e.node, e.keyword);
+        }, 300);
+    });
+    //划出节点
+    editor.minder.on('hidenoterequest', function (e) {
+        debugger;
+        setTimeout(function () {
+            if (!isOver) {
+                $(".note-previewer").hide();
+            }
+        }, 300);
+    });
+</script>
+

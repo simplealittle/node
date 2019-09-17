@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="src/progressjs.css"/>
+		<script src="src/progress.js" type="text/javascript">
+			
+		</script>
+		
+	</head>
+	<body>
+		<div id="pro">
+			
+		</div>
+		<script type="text/javascript">
+			progressJs("#pro").onbeforestart(function() {
+			  alert("before start");
+			}).onprogress(function(targetElm, percent) {
+				console.log("progress changed to:" + percent);
+				if(percent==100){
+					this.end();
+				}
+			}).onbeforeend(function() {
+			 	alert("before end");
+			}).start().autoIncrease(4, 500);
+			
+//			 function saveMind(callback) {
+//      //  获取脑图数据
+//      var deferred = $.Deferred();
+//      var deferred2 = $.Deferred();
+//
+//      //第一个ajax
+//	      $.ajax({
+//	      	type:"get",
+//	      	url:"",
+//	      	async:true,
+//	      	success:function(data){
+//	      		deferred.resolve(data);
+//	      	}
+//	      });
+//		 //第二个ajax
+//	        $.ajax({
+//	      	type:"get",
+//	      	url:"",
+//	      	async:true,
+//	      	success:function(data){
+//	      		deferred2.resolve(data);
+//	      	}
+//	      });
+//
+//      
+//      $.when(deferred, deferred2).done(function (json, png) {
+//          callback(json, png)
+//      }).fail(function (e) {
+//          alert(e);
+//      })
+//  }
+		</script>
+	</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./js/jquery-1.10.2.js" type="text/javascript">
+			
+		</script>
+		<style type="text/css">
+			.filter-mix {
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+			    width: 300px;
+			    height: 200px;
+			    filter: contrast(20);
+			    background: #fff;
+			}
+			
+			.filter-mix::before {
+			    content: "";
+			    position: absolute;
+			    width: 120px;
+			    height: 120px;
+			    border-radius: 50%;
+			    background: #333;
+			    top: 40px;
+			    left: 40px;
+			    z-index: 2;
+			    filter: blur(6px);
+			    box-sizing: border-box;
+			    animation: filterBallMove 4s ease-out infinite;
+			}
+			
+			.filter-mix::after {
+			    content: "";
+			    position: absolute;
+			    width: 80px;
+			    height: 80px;
+			    border-radius: 50%;
+			    background: #3F51B5;
+			    top: 60px;
+			    right: 40px;
+			    z-index: 2;
+			    filter: blur(6px);
+			    animation: filterBallMove2 4s ease-out infinite;
+			}
+			
+			@keyframes filterBallMove {
+			    50% {
+			        left: 140px;
+			    }
+			}
+			
+			@keyframes filterBallMove2 {
+			    50% {
+			        right: 140px;
+			    }
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		    <div class="filter-mix"></div>
+		</div> 
+		<button class="send">
+			send************
+		</button>
+		<button class="get">
+			get************
+		</button>
+		<form method="POST"  action="/post">
+			<p>userName</p>
+			<input name="name" /> <br/>
+			<p>age</p>
+			<input name="sex" /> <br/>
+			<p>webSite</p>
+			<input name='way' /><br/>
+			<button type="submit">submit</button>
+
+			</form>>
+		<script type="text/javascript">
+			$(".send").on("click",function(){
+				
+				var param = {
+					'auth_username': 15175750878,
+					'password': "5d098c3946a31f761952542242e00bd1",
+					'needOrgLists': '1',
+					'client_id': 'tplusclient',
+					'client_secret': 'pwjd5q',
+					};
+				$.ajax({
+					type:"post",
+					url:"post",
+					async:true,
+					data:param
+				}).done(function(data){
+					console.log("post:"+data)
+				})
+			})
+			$(".get").on("click",function(){
+				
+				$.ajax({
+					type:"get",
+					url:"http://127.0.0.1:1000/get?url=http://127.0.0.1:2000",
+					async:true,
+					data:{
+						name:"fff",
+						psw:'ttt'
+					}
+				}).done(function(data){
+					console.log("get:"+data)
+				})
+			})
+			window.addEventListener('deviceorientation',e => {
+				console.log('Gamma:',e.gamma);
+				alert(e.gamma)
+				console.log('Beta:',e.beta);
+				console.log('Alpha:',e.Alpha);
+			})
+
+
+			navigator.vibrate([300,200,100,400,100])
+		</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+</head>
+
+<body>
+ 
+    <div id="mse">111</div>
+ 
+    
+	<!-- <script type="text/javascript">
+		console.time("1")
+		try{
+			alert(obj)
+		}catch(e){
+			console.warn(e)
+		}
+		console.timeEnd("1")
+	</script> -->
+	<!-- 自带 defer 属性 -->
+	<script type="module">     
+		import obj from "./a.mjs"
+		alert("index")
+			alert(obj.name.name)
+	
+	</script>
+	<!-- js 默认带凭证  mjs默认不带凭证    -->
+	
+	<!-- ① 获取资源会带上凭证（如cookie等）-->
+	<!-- <script src="1.js"></script> -->
+
+	<!-- ② 获取资源不带凭证 -->
+	<!-- <script type="module" src="1.mjs"></script> -->
+	
+	
+	<!-- mjs同源和不同源带凭证的方法 -->
+
+	<!-- ③ 获取资源带凭证 -->
+	<!-- <script type="module" crossorigin src="1.mjs?"></script> -->
+
+	<!-- ④ 获取资源不带凭证 -->
+	<!-- <script type="module" crossorigin src="//cdn.zhangxinxu.com/.../1.mjs"></script> -->
+
+	<!-- ⑤ 获取资源带凭证 -->
+	<!-- <script type="module" crossorigin="use-credentials" src="//cdn.zhangxinxu.com/.../1.mjs?"></script>  -->
+</body>
+
+</html>

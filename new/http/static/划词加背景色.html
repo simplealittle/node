@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">	
+			div{
+				line-height: 16px;
+			}	
+		</style>	
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="one" contenteditable="true">今天吃了1顿饭 登峰说发的是地方点发大水发大水减肥可视对讲发了跨境电商发鸡斗始开笼加非空老蒋说的分开螺丝刀菲利克斯的老客服鸡斗始开笼发大水了今天吃了3顿饭</div>
+		<div id="two">今天吃dfsfjkjfshkfjhsdjkfhjksahfkjsdhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhdfdsfdf点击分开的减肥的数据库发阶段上看发的哭声积分看电视剧放开了的首付款了单身快乐疯狂老大说放开了都是看路费单身快乐付了款的数据付了款的数据老孔房价多少老孔发了肯定是发了肯定是进风口浪尖第三方两节课都是理科发顶楼上开发阶段是李开复的律师费 fhfhfhfhf了3顿饭   这可怎么办啊 今天吃了3顿饭</div>
+		<button id="ccc">1111</button>
+		<div id="selectBg">
+			
+		</div>
+	</body>
+	<script>
+		var move;
+		
+		var x,y,lineHeight,lineCount;//点击开始的x坐标，bg的y坐标  /行高/行数  
+		$("#two").on("mousedown",function(e){
+			move=true;	
+			$(".d").remove();
+			var target=e.target;
+			lineHeight=parseInt(target.style.lineHeight="16px");
+			lineCount=parseInt(e.offsetY/lineHeight);
+			console.log(lineCount);
+			y=target.offsetTop+lineCount*lineHeight;
+			x=e.pageX;		
+		})
+		$("#two").on("mousemove",function(e){
+			
+			if(move){
+				var target=e.target;
+				var lineCountNow=parseInt(e.offsetY/lineHeight);
+				if(lineCountNow-lineCount>0||(lineCountNow===lineCount&&e.offsetX>x)){
+					//理想bg下  删除多余元素
+					var nextAll=$(".d").eq(lineCountNow-lineCount).nextAll();
+					if(nextAll){
+						nextAll.remove();
+					}
+					//盒子的左右坐标
+					var right=target.offsetLeft+target.offsetWidth;
+					var left=target.offsetLeft;
+					
+					for(var i=0;i<lineCountNow-lineCount+1;i++){
+						
+						if($(".d").eq(i).length){
+							var $div=$(".d").eq(i);
+						}else{
+							var $div=$("<div class='d'></div>");
+							$div.appendTo(e.target);
+							$div.height(lineHeight);
+						}
+						
+						if(i==0&&i==lineCountNow-lineCount){
+							$div.css({
+								"background":"red",
+								"position":"absolute",
+								"top":y,
+								"left":x,
+								"z-index":-999,
+								"width":e.pageX-x
+							});
+						}
+						if(i==0&&i<lineCountNow-lineCount){
+							$div.css({
+								"background":"red",
+								"position":"absolute",
+								"top":y,
+								"left":x,
+								"z-index":-999,
+								"width":right-left
+							});
+						}
+						if(i>0&&i<lineCountNow-lineCount){
+							$div.css({
+								"background":"red",
+								"position":"absolute",
+								"top":y+lineHeight*i,
+								"left":left,
+								"z-index":-999,
+								"width":target.offsetWidth
+							});	
+						}
+						if(i>0&&i==lineCountNow-lineCount){
+							$div.css({
+								"background":"red",
+								"position":"absolute",
+								"top":y+lineHeight*i,
+								"left":left,
+								"z-index":-999,
+								"width":e.offsetX
+							});	
+						}
+						
+					}
+				}else{
+					//非理想状态  删除全部
+					$(".d").remove()
+				}
+			}	
+		})
+		$(document).on("mouseup",function(e){
+			move=false;
+		})
+	</script>
+</html>

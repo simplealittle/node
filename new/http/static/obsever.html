@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript">
+			
+		</script>
+		<script src="js/jquery-1.10.2.js" type="text/javascript">
+			
+		</script>	
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		
+	<div id="div"><p v-on:click.stop="aa" id="aa"> ddddd</p></div>
+		
+		
+	</body>
+	<script>	
+		var obsever=(function(){
+			var msg={};
+			return {
+				regist:function(type,fun){
+					if(!typeof fun=="function"){
+						return ;
+					}
+					if(msg[type]){
+						msg[type].push(fun);
+					}else{
+						msg[type]=[fun];
+					}
+				},
+				fire:function(type,args){
+					if(msg[type]){
+						var _event={
+							type:type,
+							args:args
+						}
+						msg[type].forEach(function(item){
+							item(_event);
+						})
+					}
+				},
+				remove:function(type,fun){
+					if(!typeof fun=="function"){
+						return ;
+					}
+					if(msg[type]){
+						msg[type]=msg[type].filter(function(item){
+							return item!==fun
+						})
+					}
+				}
+			}
+		})();
+		obsever.regist("a",function(ee){alert(ee.args)});
+		obsever.fire("a","aa")
+	</script>
+</html>
